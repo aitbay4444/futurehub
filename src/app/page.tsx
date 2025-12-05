@@ -71,7 +71,7 @@ export default function Home() {
                     frameBorder="0"
                 />
             </div>
-            <div className="absolute inset-0 bg-white/60 backdrop-blur-[1px]"></div>
+            <div className="absolute inset-0 bg-white/75 backdrop-blur-[1px]"></div>
         </div>
 
         {/* КОНТЕНТ */}
@@ -82,7 +82,7 @@ export default function Home() {
             transition={{ duration: 0.5 }}
           >
             <div className="inline-block mb-6 px-4 py-1.5 bg-blue-50/80 backdrop-blur-sm text-blue-600 rounded-full text-sm font-bold border border-blue-100 shadow-sm">
-                🚀 Хакатон Проект 2025
+                By 404 Team with ❤
             </div>
             
             {/* --- ИСПРАВЛЕННЫЙ ЗАГОЛОВОК --- */}
