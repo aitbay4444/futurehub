@@ -10,7 +10,7 @@ export function Footer() {
           <div className="space-y-4">
             <div className="flex items-center gap-2 text-white">
               <GraduationCap className="h-6 w-6" />
-              <span className="text-xl font-bold">DataHub RK</span>
+              <span className="text-xl font-bold">FutureCampus</span>
             </div>
             <p className="text-sm leading-relaxed">
               Единая платформа для абитуриентов Казахстана. Помогаем сделать правильный выбор с 2025 года.
@@ -42,7 +42,7 @@ export function Footer() {
           <div>
             <h4 className="text-white font-bold mb-4">Контакты</h4>
             <p className="text-sm mb-2">Алматы, ул. Байзакова 280</p>
-            <p className="text-sm mb-4">support@datahub.kz</p>
+            <p className="text-sm mb-4">support@futurecampus.kz</p>
             <div className="flex gap-4">
               <Instagram className="w-5 h-5 hover:text-white cursor-pointer transition-colors" />
               <Facebook className="w-5 h-5 hover:text-white cursor-pointer transition-colors" />
@@ -52,7 +52,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-neutral-800 pt-8 text-center text-sm">
-          © 2025 DataHub Hackathon Team. Все права защищены.
+          © 2025 FutureCampus by 404 Team. Все права защищены.
         </div>
       </div>
     </footer>

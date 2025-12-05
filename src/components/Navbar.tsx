@@ -14,7 +14,7 @@ export function Navbar() {
             <GraduationCap className="h-6 w-6" />
           </div>
           <span className="text-xl font-black text-neutral-900 tracking-tight">
-            DataHub <span className="text-blue-600">RK</span>
+            Future<span className="text-blue-600">Campus</span>
           </span>
         </Link>
 

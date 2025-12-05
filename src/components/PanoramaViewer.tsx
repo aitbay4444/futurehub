@@ -15,7 +15,7 @@ export function PanoramaViewer({ previewImage, tourUrl }: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   // Если ссылки нет, ставим красивую библиотеку по умолчанию
-  const finalUrl = tourUrl || "https://cdn.pannellum.org/2.5/pannellum.htm#panorama=https://pannellum.org/images/milan.jpg&autoLoad=true&title=Библиотека&author=DataHub";
+  const finalUrl = tourUrl || "https://cdn.pannellum.org/2.5/pannellum.htm#panorama=https://pannellum.org/images/milan.jpg&autoLoad=true&title=Библиотека&author=FutureCampus";
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>

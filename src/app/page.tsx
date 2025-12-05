@@ -71,7 +71,7 @@ export default function Home() {
                     frameBorder="0"
                 />
             </div>
-            <div className="absolute inset-0 bg-white/90 backdrop-blur-[1px]"></div>
+            <div className="absolute inset-0 bg-white/60 backdrop-blur-[1px]"></div>
         </div>
 
         {/* КОНТЕНТ */}

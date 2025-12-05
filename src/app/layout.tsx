@@ -8,8 +8,8 @@ import { Chatbot } from "@/components/Chatbot";
 const inter = Inter({ subsets: ["latin", "cyrillic"] });
 
 export const metadata: Metadata = {
-  title: "DataHub ВУЗ-ов РК | Единый каталог",
-  description: "Сравнивайте программы, цены и рейтинги университетов Казахстана.",
+  title: "FutureCampus | Единый каталог университетов",
+  description: "Сравнивайте программы, цены и рейтинги университетов Казахстана на FutureCampus.",
 };
 
 export default function RootLayout({

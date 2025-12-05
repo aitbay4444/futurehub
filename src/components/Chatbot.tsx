@@ -15,7 +15,7 @@ type Message = {
 export function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { id: 1, text: "Привет! Я AI-помощник DataHub. Готов ответить на вопросы по поступлению, ценам и грантам! 🎓", sender: "bot" }
+    { id: 1, text: "Привет! Я AI-помощник FutureCampus. Готов ответить на вопросы по поступлению, ценам и грантам! 🎓", sender: "bot" }
   ]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -109,7 +109,7 @@ export function Chatbot() {
                     <Bot className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                    <h3 className="font-bold text-white">DataHub AI</h3>
+                    <h3 className="font-bold text-white">FutureCampus AI</h3>
                     <p className="text-xs text-blue-100 flex items-center gap-1">
                         <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
                         Online
