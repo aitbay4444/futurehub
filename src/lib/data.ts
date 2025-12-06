@@ -73,7 +73,7 @@ export const universities: University[] = [
       address: "г. Алматы, ул. Толе би 59"
     },
     images: {
-      main: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=1000",
+      main: "/images/universities/kbtu_front_build.jpg",
       gallery: ["https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80&w=1000"]
     },
     stats: { students: 4500, employmentRate: 98, minScore: 100 },
@@ -117,7 +117,7 @@ export const universities: University[] = [
       address: "г. Каскелен, ул. Абылай хана 1/1"
     },
     images: {
-      main: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80&w=1000",
+      main: "/images/universities/photo_5377523080542415757_y.jpg",
       gallery: []
     },
     stats: { students: 8000, employmentRate: 92, minScore: 85 },
@@ -162,7 +162,7 @@ export const universities: University[] = [
       address: "г. Алматы, ул. Жандосова 55"
     },
     images: {
-      main: "https://images.unsplash.com/photo-1592280771190-3e2e4d571952?auto=format&fit=crop&q=80&w=1000",
+      main: "/images/universities/003cdf57-b459-4cfc-a92c-9065541fbf07.webp",
       gallery: []
     },
     stats: { students: 6000, employmentRate: 85, minScore: 70 },
@@ -179,7 +179,7 @@ export const universities: University[] = [
       description: "Программы двойного диплома с вузами Великобритании (Coventry) и Франции (La Rochelle).",
       partners: ["Coventry University (UK)", "La Rochelle Business School (France)", "Hof University (Germany)"]
     },
-    tourUrl: "https://cdn.pannellum.org/2.5/pannellum.htm#panorama=https://pannellum.org/images/alma.jpg&autoLoad=true&title=Кампус Нархоз"
+    tourUrl: "https://mir3d.kz/Narxoz_VR/"
   },
 
   // 4. КАЗНУ (Национальный гигант)
@@ -206,7 +206,7 @@ export const universities: University[] = [
       address: "г. Алматы, пр. аль-Фараби 71"
     },
     images: {
-      main: "https://images.unsplash.com/photo-1527891751199-7225231a68dd?auto=format&fit=crop&q=80&w=1000",
+      main: "/images/universities/20241114143506535_big.webp",
       gallery: []
     },
     stats: { students: 25000, employmentRate: 88, minScore: 95 },
@@ -251,7 +251,7 @@ export const universities: University[] = [
       address: "г. Алматы, ул. Сатпаева 22"
     },
     images: {
-      main: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000",
+      main: "/images/universities/_793-446.jpg",
       gallery: []
     },
     stats: { students: 12000, employmentRate: 90, minScore: 75 },
@@ -294,7 +294,7 @@ export const universities: University[] = [
       address: "г. Алматы, пр. Абая 2"
     },
     images: {
-      main: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&q=80&w=1000",
+      main: "/images/universities/comission.jpg",
       gallery: []
     },
     stats: { students: 3500, employmentRate: 96, minScore: 110 },
@@ -337,7 +337,7 @@ export const universities: University[] = [
       address: "г. Алматы, ул. Манаса 34/1"
     },
     images: {
-      main: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=1000",
+      main: "/images/universities/image_750x_62f348dc73cca.jpg",
       gallery: []
     },
     stats: { students: 5000, employmentRate: 95, minScore: 95 },
@@ -381,7 +381,7 @@ export const universities: University[] = [
       address: "г. Алматы, ул. Байтурсынова 126"
     },
     images: {
-      main: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1000",
+      main: "/images/universities/aad53fe8-2864-4af0-b6d9-0d66a01ba122.jpeg",
       gallery: []
     },
     stats: { students: 6000, employmentRate: 88, minScore: 70 },
@@ -424,7 +424,7 @@ export const universities: University[] = [
       address: "г. Алматы, ул. Сатпаева 16А"
     },
     images: {
-      main: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1000",
+      main: "/images/universities/ob-universitete-oblozhka-scaled.jpg",
       gallery: []
     },
     stats: { students: 4000, employmentRate: 82, minScore: 65 },
@@ -457,7 +457,7 @@ export const universities: University[] = [
       address: "г. Алматы, пр. Достык 13"
     },
     images: {
-      main: "https://images.unsplash.com/photo-1492538368677-f6e0afe31dcc?auto=format&fit=crop&q=80&w=1000",
+      main: "/images/universities/img_8293-1024x576.webp",
       gallery: []
     },
     stats: { students: 10000, employmentRate: 98, minScore: 75 },
@@ -490,7 +490,7 @@ export const universities: University[] = [
       address: "г. Алматы, ул. Толе би 94"
     },
     images: {
-      main: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=1000",
+      main: "/images/universities/univer-med.jpg",
       gallery: []
     },
     stats: { students: 11000, employmentRate: 99, minScore: 85 },

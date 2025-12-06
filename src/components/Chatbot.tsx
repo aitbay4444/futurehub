@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { MessageCircle, X, Send, Bot, User } from "lucide-react";
+import { MessageCircle, X, Send, Bot } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 type Message = {
@@ -21,58 +21,57 @@ export function Chatbot() {
   const [isTyping, setIsTyping] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Автоскролл вниз при новом сообщении
+  // Автоскролл вниз
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [messages, isTyping]);
 
+  // --- НОВАЯ ФУНКЦИЯ ОТПРАВКИ (С API) ---
   const handleSend = async () => {
     if (!input.trim()) return;
 
-    // 1. Добавляем сообщение пользователя
+    // 1. Добавляем сообщение юзера
     const userMsg: Message = { id: Date.now(), text: input, sender: "user" };
     setMessages((prev) => [...prev, userMsg]);
-    setInput("");
-    setIsTyping(true);
+    const currentInput = input; // Сохраняем текст для отправки
+    setInput(""); // Очищаем поле
+    setIsTyping(true); // Включаем анимацию печатания
 
-    // 2. Имитация "думания" ИИ (1.5 секунды)
-    setTimeout(() => {
-      const botResponse = getBotResponse(userMsg.text);
-      setMessages((prev) => [...prev, { id: Date.now() + 1, text: botResponse, sender: "bot" }]);
+    try {
+      // 2. Отправляем запрос на НАШ сервер (который пойдет в Google)
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: currentInput }),
+      });
+
+      const data = await response.json();
+
+      if (data.response) {
+        setMessages((prev) => [
+          ...prev, 
+          { id: Date.now() + 1, text: data.response, sender: "bot" }
+        ]);
+      } else {
+        throw new Error("No response");
+      }
+    } catch (error) {
+      console.error("Chat error:", error);
+      // Фолбэк, если интернет упал или ключ не работает
+      setMessages((prev) => [
+        ...prev, 
+        { id: Date.now() + 1, text: "Извините, сейчас высокая нагрузка на сервер AI. Попробуйте позже. 😔", sender: "bot" }
+      ]);
+    } finally {
       setIsTyping(false);
-    }, 1500);
-  };
-
-  // --- МОЗГИ БОТА (Логика ответов) ---
-  const getBotResponse = (text: string) => {
-    const t = text.toLowerCase();
-    
-    if (t.includes("цена") || t.includes("стоит") || t.includes("оплата")) 
-      return "Стоимость обучения в топовых вузах (КБТУ, КИМЭП) варьируется от 2.5 до 3.2 млн тг в год. В национальных вузах (КазНУ, Политех) цены ниже — от 950 тыс. тг.";
-    
-    if (t.includes("грант") || t.includes("бюджет")) 
-      return "В 2025 году выделено более 80,000 грантов! Основной упор на технические специальности (IT, Инженерия). Проходной балл на грант обычно от 100+ баллов ЕНТ.";
-    
-    if (t.includes("кбту")) 
-      return "КБТУ — лидер тех. образования. Сильные стороны: IT, Нефтегаз и Финансы. Есть общежитие и военная кафедра. Цена: ~2.8 млн тг.";
-    
-    if (t.includes("сду") || t.includes("sdu")) 
-      return "СДУ находится в Каскелене. Это супер-современный кампус. Сильнейшая школа программирования и педагогики. Есть бесплатная развозка из города.";
-    
-    if (t.includes("нархоз")) 
-      return "Нархоз прошел полную трансформацию. Теперь это крутой эко-кампус. Лидер в Экономике и Праве. Цена доступная: ~1.3 млн тг.";
-
-    if (t.includes("привет") || t.includes("здравствуй"))
-      return "Привет! Чем могу помочь? Спрашивай про вузы или цены.";
-
-    return "Интересный вопрос! Для детальной информации рекомендую воспользоваться функцией 'Сравнение' на нашем сайте или оставить заявку в вуз.";
+    }
   };
 
   return (
     <>
-      {/* КНОПКА ОТКРЫТИЯ (Плавающая) */}
+      {/* КНОПКА ОТКРЫТИЯ */}
       <motion.div 
         className="fixed bottom-6 right-6 z-50"
         initial={{ scale: 0 }}
@@ -85,13 +84,6 @@ export function Chatbot() {
         >
             {isOpen ? <X className="w-6 h-6 text-white" /> : <MessageCircle className="w-7 h-7 text-white" />}
         </Button>
-        {/* Бейдж уведомления */}
-        {!isOpen && (
-            <span className="absolute -top-1 -right-1 flex h-4 w-4">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-4 w-4 bg-red-500"></span>
-            </span>
-        )}
       </motion.div>
 
       {/* ОКНО ЧАТА */}
@@ -101,7 +93,7 @@ export function Chatbot() {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-24 right-6 z-50 w-[350px] md:w-[400px] h-[500px] bg-white rounded-2xl shadow-2xl border border-neutral-200 flex flex-col overflow-hidden"
+            className="fixed bottom-24 right-6 z-50 w-[350px] md:w-[400px] h-[500px] bg-white dark:bg-neutral-900 rounded-2xl shadow-2xl border border-neutral-200 dark:border-neutral-800 flex flex-col overflow-hidden"
           >
             {/* Хедер */}
             <div className="bg-blue-600 p-4 flex items-center gap-3">
@@ -118,13 +110,13 @@ export function Chatbot() {
             </div>
 
             {/* Сообщения */}
-            <div ref={scrollRef} className="flex-1 p-4 overflow-y-auto bg-neutral-50 space-y-4">
+            <div ref={scrollRef} className="flex-1 p-4 overflow-y-auto bg-neutral-50 dark:bg-neutral-950 space-y-4">
                 {messages.map((msg) => (
                     <div key={msg.id} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
                         <div className={`max-w-[80%] p-3 rounded-2xl text-sm ${
                             msg.sender === 'user' 
                             ? 'bg-blue-600 text-white rounded-br-none' 
-                            : 'bg-white border border-neutral-200 text-neutral-800 rounded-bl-none shadow-sm'
+                            : 'bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-800 dark:text-white rounded-bl-none shadow-sm'
                         }`}>
                             {msg.text}
                         </div>
@@ -134,7 +126,7 @@ export function Chatbot() {
                 {/* Анимация печатания */}
                 {isTyping && (
                     <div className="flex justify-start">
-                        <div className="bg-white border border-neutral-200 p-3 rounded-2xl rounded-bl-none shadow-sm flex gap-1">
+                        <div className="bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 p-3 rounded-2xl rounded-bl-none shadow-sm flex gap-1">
                             <span className="w-2 h-2 bg-neutral-400 rounded-full animate-bounce"></span>
                             <span className="w-2 h-2 bg-neutral-400 rounded-full animate-bounce delay-75"></span>
                             <span className="w-2 h-2 bg-neutral-400 rounded-full animate-bounce delay-150"></span>
@@ -143,27 +135,14 @@ export function Chatbot() {
                 )}
             </div>
 
-            {/* Быстрые вопросы (Chips) */}
-            <div className="px-4 py-2 bg-neutral-50 flex gap-2 overflow-x-auto no-scrollbar">
-                {["Сколько стоит КБТУ?", "Какие есть гранты?", "Сравнить вузы"].map(q => (
-                    <button 
-                        key={q} 
-                        onClick={() => { setInput(q); handleSend(); }} // Сразу отправляем при клике? Нет, лучше вставить в инпут или сразу отправить. Давай сразу отправим для вау-эффекта
-                        className="whitespace-nowrap px-3 py-1 bg-white border border-blue-200 text-blue-600 text-xs rounded-full hover:bg-blue-50 transition-colors"
-                    >
-                        {q}
-                    </button>
-                ))}
-            </div>
-
             {/* Инпут */}
-            <div className="p-4 bg-white border-t border-neutral-100 flex gap-2">
+            <div className="p-4 bg-white dark:bg-neutral-900 border-t border-neutral-100 dark:border-neutral-800 flex gap-2">
                 <Input 
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleSend()}
                     placeholder="Задайте вопрос..."
-                    className="focus-visible:ring-blue-600"
+                    className="focus-visible:ring-blue-600 dark:bg-neutral-800 dark:text-white dark:border-neutral-700"
                 />
                 <Button onClick={handleSend} size="icon" className="bg-blue-600 hover:bg-blue-700 shrink-0">
                     <Send className="w-4 h-4" />
